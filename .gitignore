@@ -11,6 +11,14 @@ target/
 *.tar.gz
 *.rar
 .DS_Store
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+.idea/
 
 *.iml
 ### IntelliJ IDEA ###
