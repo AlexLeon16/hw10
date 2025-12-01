@@ -1,4 +1,5 @@
 package ru.netology.stats;
+
 public class PosterManager {
     private Movie[] movies;
     private int limit;

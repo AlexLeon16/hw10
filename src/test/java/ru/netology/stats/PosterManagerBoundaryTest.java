@@ -3,7 +3,7 @@ package ru.netology.stats;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PosterManagerBoundaryTest {
+public class PosterManagerBoundaryTest {
 
     @Test
     void shouldHandleExactLimit() {
@@ -19,11 +19,16 @@ class PosterManagerBoundaryTest {
             manager.addMovie(movie);
         }
 
-        Movie[] last = manager.findLast();
-        assertEquals(3, last.length);
-        assertEquals(testMovies[2], last[0]);
-        assertEquals(testMovies[1], last[1]);
-        assertEquals(testMovies[0], last[2]);
+        Movie[] expected = {
+                testMovies[2], // "Фильм 3"
+                testMovies[1], // "Фильм 2"
+                testMovies[0]  // "Фильм 1"
+        };
+
+        Movie[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+        assertEquals(3, actual.length);
     }
 
     @Test
@@ -33,12 +38,37 @@ class PosterManagerBoundaryTest {
 
         manager.addMovie(movie);
 
-        Movie[] all = manager.findAll();
-        assertEquals(1, all.length);
-        assertEquals(movie, all[0]);
+        Movie[] expectedAll = {movie};
+        Movie[] actualAll = manager.findAll();
+        assertArrayEquals(expectedAll, actualAll);
 
-        Movie[] last = manager.findLast();
-        assertEquals(1, last.length);
-        assertEquals(movie, last[0]);
+        Movie[] expectedLast = {movie};
+        Movie[] actualLast = manager.findLast();
+        assertArrayEquals(expectedLast, actualLast);
+
+        assertEquals(1, manager.getMoviesCount());
+    }
+
+    @Test
+    void shouldHandleZeroLimit() {
+        PosterManager manager = new PosterManager(0);
+
+        manager.addMovie(new Movie("Фильм 1", "жанр1"));
+        manager.addMovie(new Movie("Фильм 2", "жанр2"));
+
+        Movie[] expected = new Movie[0];
+        Movie[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+        assertEquals(0, actual.length);
+    }
+
+    @Test
+    void shouldHandleNegativeLimit() {
+
+        PosterManager manager = new PosterManager(-1);
+
+        manager.addMovie(new Movie("Фильм 1", "жанр1"));
+
     }
 }

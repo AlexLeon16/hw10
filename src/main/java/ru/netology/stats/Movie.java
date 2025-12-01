@@ -1,5 +1,7 @@
 package ru.netology.stats;
 
+import java.util.Objects;
+
 public class Movie {
     private String title;
     private String genre;
@@ -27,12 +29,12 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return java.util.Objects.equals(title, movie.title) &&
-                java.util.Objects.equals(genre, movie.genre);
+        return Objects.equals(title, movie.title) &&
+                Objects.equals(genre, movie.genre);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(title, genre);
+        return Objects.hash(title, genre);
     }
 }
